@@ -1,0 +1,194 @@
+@import "tailwindcss";
+@import "@fontsource-variable/outfit/index.css";
+@import "@fontsource/noto-sans-devanagari/devanagari-400.css";
+@import "@fontsource/noto-sans-devanagari/devanagari-600.css";
+
+@theme {
+  --font-sans: "Outfit Variable", "Noto Sans Devanagari", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  --color-bg: #0c0d10;
+  --color-surface: #14161b;
+  --color-surface-2: #1c1f26;
+  --color-fg: #f4f1ea;
+  --color-muted: #a8a296;
+  --color-subtle: #9a948a;
+  --color-border: color-mix(in oklab, #f4f1ea 14%, transparent);
+  --color-border-strong: color-mix(in oklab, #f4f1ea 28%, transparent);
+  --color-accent: #f4f1ea;
+  --color-accent-fg: #14161b;
+
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    transition-property: background-color, color, border-color, opacity, transform;
+    transition-duration: 150ms;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  button:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-fg);
+    outline-offset: 2px;
+  }
+
+  fieldset {
+    min-inline-size: 0;
+    margin: 0;
+    border: 0;
+    padding: 0;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-fg) 24%, transparent);
+    color: var(--color-fg);
+  }
+}
+
+.shell {
+  width: 100%;
+  max-width: 64rem;
+  margin-inline: auto;
+  padding-top: max(1.5rem, env(safe-area-inset-top));
+  padding-bottom: max(2.5rem, env(safe-area-inset-bottom));
+  padding-left: max(1rem, env(safe-area-inset-left));
+  padding-right: max(1rem, env(safe-area-inset-right));
+}
+
+@media (min-width: 40rem) {
+  .shell {
+    padding-top: max(2.5rem, env(safe-area-inset-top));
+    padding-left: max(1.5rem, env(safe-area-inset-left));
+    padding-right: max(1.5rem, env(safe-area-inset-right));
+  }
+}
+
+.preview-frame {
+  width: 100%;
+  transition: max-width 150ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.color-input {
+  appearance: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: none;
+  padding: 0;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  cursor: pointer;
+}
+
+.color-input::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.color-input::-webkit-color-swatch {
+  border: none;
+  border-radius: calc(var(--radius-sm) - 1px);
+}
+
+.color-input::-moz-color-swatch {
+  border: none;
+  border-radius: calc(var(--radius-sm) - 1px);
+}
+
+.size-range {
+  appearance: none;
+  width: 100%;
+  height: 2.75rem;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.size-range::-webkit-slider-runnable-track {
+  height: 0.25rem;
+  border-radius: 999px;
+  background: var(--color-border-strong);
+}
+
+.size-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 1.375rem;
+  height: 1.375rem;
+  margin-top: -0.5625rem;
+  border: 2px solid var(--color-bg);
+  border-radius: 999px;
+  background: var(--color-fg);
+  box-shadow: 0 0 0 1px var(--color-border-strong);
+}
+
+.size-range::-moz-range-track {
+  height: 0.25rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--color-border-strong);
+}
+
+.size-range::-moz-range-thumb {
+  width: 1.375rem;
+  height: 1.375rem;
+  border: 2px solid var(--color-bg);
+  border-radius: 999px;
+  background: var(--color-fg);
+}
+
+.swatch {
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-fg) 35%, transparent);
+}
+
+button[aria-pressed="true"],
+button[aria-pressed="true"]:hover {
+  background-color: var(--color-fg);
+  color: var(--color-accent-fg);
+  border-color: var(--color-fg);
+}
+
+label:has(input:focus-visible) {
+  outline: 2px solid var(--color-fg);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preview-frame {
+    transition: none;
+  }
+
+  button:active:not(:disabled) {
+    transform: none;
+  }
+}
